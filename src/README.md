@@ -1,5 +1,7 @@
 ## What am I looking at?
-This is a form to edit information about a film. This form demonstrates a few code patterns we use internally – it's built to support automatically saving a draft whenever fields are blurred, and publishing content when a user clicks a button.
+This is a form to edit information about a film. This form demonstrates a few code patterns we use internally, including async/await methods, subcomponents, and functions-as-child-components.
+
+The UI is designed to be a form that saves drafts whenever a field is blured and saves content with a `published` flag when the form is explicitly submitted.
 
 The form uses a simple mocked API service that simulates GET and POST requests with a delay of 250ms by returning promises.
 
