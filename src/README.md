@@ -7,7 +7,7 @@ The form uses a simple mocked API service that simulates GET and POST requests w
 Run `yarn install` and `yarn start` to run the development server.
 
 ## Instructions
-1. Document the code in `App.js` to the best of your ability. Useful things to include are documentation for method arguments and line-by-line descriptions of what happens inside methods. If there's anything you're unsure about, leave a comment indicating what doesn't make sense. Finally, as you're documenting, feel free to edit any code you feel would improve readability (if you do so, add a `// CHANGED` comment so we can find what you changed.)
+1. Document the code in `App.js` to the best of your ability. Useful things to include are documentation for method arguments and line-by-line descriptions of what happens inside methods. If there's anything you're unsure about, leave a comment indicating what doesn't make sense. Finally and optionally, as you're documenting, feel free to edit any code you feel would improve readability (if you do so, add a `// CHANGED` comment so we can find what you changed.)
 2. Implement an input to edit a film's release year. This should be written as a `<select>` element with options for the years between 2010 and 2020.
 3. Implement an input to edit a film's rating. The value it produces should be an integer. (Feel free to refactor an existing component in order to support this.)
 4. One of the components defined in `./components` has a bug that will prevent it from behaving as expected. Identify and fix the bug.
