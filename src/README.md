@@ -1,7 +1,7 @@
 ## What am I looking at?
-This is a form to edit information about a film. This form demonstrates a few code patterns we use internally – it's built to support automatically saving content whenever fields are blurred.
+This is a form to edit information about a film. This form demonstrates a few code patterns we use internally – it's built to support automatically saving a draft whenever fields are blurred, and publishing content when a user clicks a button.
 
-The form uses a simple mocked API service that simulates network requests with a delay of 250ms by returning a promise.
+The form uses a simple mocked API service that simulates GET and POST requests with a delay of 250ms by returning promises.
 
 ## Running app
 Run `yarn install` and `yarn start` to run the development server.
