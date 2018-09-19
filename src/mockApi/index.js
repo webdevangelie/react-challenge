@@ -2,7 +2,7 @@ const data = require('./data.json')
 
 /**
  * Mock GET method. Returns data based on numeric key.
- * @param {number} id   ID corresponding to key in the `data` object defined above. For mocking purposes, should be 1 or 2.
+ * @param {number} id   ID corresponding to key in the `data` object defined above. For mocking purposes, should be 1, 2, or 3.
  */
 const get = id => new Promise(resolve => {
   setTimeout(() => resolve(data[id] || null), 250)
