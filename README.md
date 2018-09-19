@@ -5,8 +5,12 @@ The UI is designed to be a form that saves drafts whenever a field is blured and
 
 The form uses a simple mocked API service that simulates GET and POST requests with a delay of 250ms by returning promises.
 
-## Running app
-Run `yarn install` and `yarn start` to run the development server.
+## What to do
+Fork this repo.
+
+Run `npm install` and `npm start` to run the development server.
+
+When you're finished with the challenge, just send us a link to your forked repo – don't worry about sending a pull request.
 
 ## Instructions
 1. Document the code in `App.js` to the best of your ability. Useful things to include are documentation for method arguments and line-by-line descriptions of what happens inside methods. If there's anything you're unsure about, leave a comment indicating what doesn't make sense. Finally and optionally, as you're documenting, feel free to edit any code you feel would improve readability (if you do so, add a `// CHANGED` comment so we can find what you changed.)
