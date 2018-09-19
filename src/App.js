@@ -82,7 +82,7 @@ class App extends React.Component {
   render() {
     const { Input } = this
     return (
-      <div class="Form">
+      <div className="Form">
         <Input label="Title" id="title">
           {props => <Text {...props} />}
         </Input>
