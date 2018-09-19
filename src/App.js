@@ -10,6 +10,7 @@ class App extends React.Component {
         title: '',
         rating: 0,
         year: null,
+        description: '',
         upcoming: true, 
         cast: [],
       }
