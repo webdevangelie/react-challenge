@@ -27,9 +27,16 @@ class App extends React.Component {
   }
 
   /**
-   *
+   * Input Change Handler
+   * Takes in @param {object} delta
+   * Copy data from the state and modify it depending on passed in key:value pair
+   * Used inside Input method
    */
   handleChange(delta) {
+    /** Use setState to modify state, specifically data object
+     * Extract data from state using object destructuring
+     * Modify data with a copy of the data object from previous state including the changes (delta) as value
+     */
     this.setState(({ data }) => ({ data: { ...data, ...delta } }));
   }
 
