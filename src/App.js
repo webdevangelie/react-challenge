@@ -5,6 +5,9 @@ import api from './mockApi';
 class App extends React.Component {
   constructor(props) {
     super(props);
+    /**
+     * Initialize state.
+     */
     this.state = {
       data: {
         title: '',
@@ -15,7 +18,9 @@ class App extends React.Component {
         cast: []
       }
     };
-
+    /**
+     * Bind 'this' keyword to respective methods.
+     */
     this.handleChange = this.handleChange.bind(this);
     this.handleUpdate = this.handleUpdate.bind(this);
     this.Input = this.Input.bind(this);
