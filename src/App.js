@@ -16,7 +16,8 @@ class App extends React.Component {
         description: '',
         upcoming: true,
         cast: []
-      }
+      },
+      isLoading: false
     };
     /**
      * Bind 'this' keyword to respective methods.
@@ -25,6 +26,16 @@ class App extends React.Component {
     this.handleUpdate = this.handleUpdate.bind(this);
     this.Input = this.Input.bind(this);
   }
+
+  componentDidMount = () => {
+    if (this.props.id) {
+      this.setState({ isLoading: true }, () => {
+        api.get(this.props.id).then(data => {
+          this.setState({ data, isLoading: false });
+        });
+      });
+    }
+  };
 
   /**
    * Input Change Handler. Doesn't return anything but uses setState to change data object in state
@@ -159,8 +170,10 @@ class App extends React.Component {
      * Use Input to create wrapper component for input element components(Text, Checkbox, Textarea, Repeatable)
      */
     const { Input } = this;
+    const { isLoading } = this.state;
     return (
       <div className="Form">
+        {isLoading && <p>Loading...</p>}
         <Input label="Title" id="title">
           {props => <Text type="text" {...props} />}
         </Input>
