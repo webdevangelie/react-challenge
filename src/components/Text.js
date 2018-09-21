@@ -1,3 +1,5 @@
-import React from 'react'
+import React from 'react';
 
-export default props => <input {...props} value={props.value || '' } type="text" />
+export default props => (
+  <input {...props} value={props.value || ''} type={props.type} />
+);
