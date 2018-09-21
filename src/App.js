@@ -40,12 +40,16 @@ class App extends React.Component {
   }
 
   /**
-   *
+   * Input Update Handler. Returns result which is equal to the return value of mock POST method (same data that got passed in)
+   * @param {boolean} publish Default value: false
    */
   async handleUpdate(publish = false) {
+    // Extract data from state using object destructuring
     const { data } = this.state;
+    // Call mock POST method and pass in a copy of data adding in publish property and value. Use await to wait for the call to finish and store return value to variable result
     const results = await api.post({ ...data, publish });
     console.log('Content updated!');
+    // Return a promise with results as resolve value
     return results;
   }
 
