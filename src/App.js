@@ -158,7 +158,7 @@ class App extends React.Component {
     return (
       <div className="Form">
         <Input label="Title" id="title">
-          {props => <Text {...props} />}
+          {props => <Text type="text" {...props} />}
         </Input>
         <Input label="Upcoming" id="upcoming">
           {props => <Checkbox {...props} />}
@@ -171,6 +171,9 @@ class App extends React.Component {
         </Input>
         <Input label="Year" id="year">
           {props => <Select {...props} />}
+        </Input>
+        <Input label="Rating" id="rating">
+          {props => <Text type="number" {...props} />}
         </Input>
         {/* Use handleUpdate method for button handler. Passing in true as argument for publish */}
         <button onClick={() => this.handleUpdate(true)}>{'Publish'}</button>
