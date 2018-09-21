@@ -34,5 +34,17 @@
       { "id": 8, "name": "Jude Law" },
       { "id": 9, "name": "Samuel L. Jackson" }
     ]
+  },
+  "4": {
+    "title": "Guardians of the Galaxy",
+    "rating": 5,
+    "description": "Brash space adventurer Peter Quill (Chris Pratt) finds himself the quarry of relentless bounty hunters after he steals an orb coveted by Ronan, a powerful villain.",
+    "year": 2014,
+    "upcoming": false,
+    "cast": [
+      { "id": 10, "name": "Chris Pratt" },
+      { "id": 11, "name": "Zoe Saldana" },
+      { "id": 12, "name": "Vin Diesel" }
+    ]
   }
 }
