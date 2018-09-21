@@ -1,5 +1,5 @@
 import React from 'react';
-import { Checkbox, Repeatable, Text, Textarea } from './components';
+import { Checkbox, Repeatable, Text, Textarea, Select } from './components';
 import api from './mockApi';
 
 class App extends React.Component {
@@ -12,7 +12,7 @@ class App extends React.Component {
       data: {
         title: '',
         rating: 0,
-        year: null,
+        year: '',
         description: '',
         upcoming: true,
         cast: []
@@ -168,6 +168,9 @@ class App extends React.Component {
         </Input>
         <Input label="Cast" iterable id="cast">
           {props => <Repeatable {...props} />}
+        </Input>
+        <Input label="Year" id="year">
+          {props => <Select {...props} />}
         </Input>
         {/* Use handleUpdate method for button handler. Passing in true as argument for publish */}
         <button onClick={() => this.handleUpdate(true)}>{'Publish'}</button>
