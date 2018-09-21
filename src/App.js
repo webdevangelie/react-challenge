@@ -135,7 +135,11 @@ class App extends React.Component {
         // Call handleUpdate method passing in false as argument when input loses focus
         onBlur: () => this.handleUpdate(false),
         // Call handleChange helper function passing in e.taget.value as argument when input changes
-        onChange: e => handleChange(e.target.value)
+        onChange: e => {
+          e.target.type === 'checkbox'
+            ? handleChange(e.target.checked)
+            : handleChange(e.target.value);
+        }
       };
     }
 
