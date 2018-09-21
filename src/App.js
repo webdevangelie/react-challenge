@@ -17,7 +17,9 @@ class App extends React.Component {
         upcoming: true,
         cast: []
       },
-      isLoading: false
+      isLoading: false,
+      isUpdating: false,
+      updateMessage: ''
     };
     /**
      * Bind 'this' keyword to respective methods.
@@ -29,12 +31,17 @@ class App extends React.Component {
 
   /**
    * Will run when component is mounted.
-   *
+   * Checks to see if prop id is passed in. If id passed in, will send a get request to mock api and load initial data.
    */
   componentDidMount = () => {
+    // Check if id got passed in
     if (this.props.id) {
+      // Use setState to show 'loading...' on screen
+      // Pass in anonymous callback function as second parameter
       this.setState({ isLoading: true }, () => {
+        // Send get request to mock api and use passed in id as parameter
         api.get(this.props.id).then(data => {
+          // Use data that got sent back from request as initial data and set isLoading to false
           this.setState({ data, isLoading: false });
         });
       });
@@ -61,11 +68,19 @@ class App extends React.Component {
   async handleUpdate(publish = false) {
     // Extract data from state using object destructuring
     const { data } = this.state;
-    // Call mock POST method and pass in a copy of data adding in publish property and value. Use await to wait for the call to finish and store return value to variable results
-    const results = await api.post({ ...data, publish });
-    console.log('Content updated!');
-    // Return a promise with results as resolve value
-    return results;
+
+    this.setState({ isUpdating: true, updateMessage: 'Updating' });
+
+    try {
+      // Call mock POST method and pass in a copy of data adding in publish property and value. Use await to wait for the call to finish and store return value to variable results
+      const results = await api.post({ ...data, publish });
+      console.log('Content updated!');
+      // Return a promise with results as resolve value
+      this.setState({ updateMessage: 'Successful' });
+      return results;
+    } catch (error) {
+      this.setState({ updateMessage: 'Unscessful' });
+    }
   }
 
   /**
@@ -148,7 +163,10 @@ class App extends React.Component {
         value, // {any} value can be anything
 
         // Call handleUpdate method passing in false as argument when input loses focus
-        onBlur: () => this.handleUpdate(false),
+        onBlur: () =>
+          this.handleUpdate(false).then(() =>
+            setTimeout(() => this.setState({ isUpdating: false }), 1000)
+          ),
         // Call handleChange helper function passing in e.taget.value as argument when input changes
         onChange: e => {
           e.target.type === 'checkbox'
@@ -174,7 +192,7 @@ class App extends React.Component {
      * Use Input to create wrapper component for input element components(Text, Checkbox, Textarea, Repeatable)
      */
     const { Input } = this;
-    const { isLoading } = this.state;
+    const { isLoading, isUpdating, updateMessage } = this.state;
     return (
       <div className="Form">
         {isLoading && <p>Loading...</p>}
@@ -197,7 +215,16 @@ class App extends React.Component {
           {props => <Text type="number" {...props} />}
         </Input>
         {/* Use handleUpdate method for button handler. Passing in true as argument for publish */}
-        <button onClick={() => this.handleUpdate(true)}>{'Publish'}</button>
+        <button
+          onClick={() =>
+            this.handleUpdate(true).then(() =>
+              setTimeout(() => this.setState({ isUpdating: false }), 1000)
+            )
+          }
+        >
+          {'Publish'}
+        </button>
+        {isUpdating && updateMessage}
       </div>
     );
   }
