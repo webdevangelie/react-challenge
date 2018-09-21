@@ -69,17 +69,22 @@ class App extends React.Component {
     // Extract data from state using object destructuring
     const { data } = this.state;
 
-    this.setState({ isUpdating: true, updateMessage: 'Updating' });
+    // Set is updating to true and updateMessage to 'Updating...'
+    this.setState({ isUpdating: true, updateMessage: 'Updating...' });
 
     try {
       // Call mock POST method and pass in a copy of data adding in publish property and value. Use await to wait for the call to finish and store return value to variable results
       const results = await api.post({ ...data, publish });
       console.log('Content updated!');
+
+      // Change updateMessage to 'Successful!'
+      this.setState({ updateMessage: 'Successful!' });
+
       // Return a promise with results as resolve value
-      this.setState({ updateMessage: 'Successful' });
       return results;
     } catch (error) {
-      this.setState({ updateMessage: 'Unscessful' });
+      // Change updateMessage to 'Unsuccessful!'
+      this.setState({ updateMessage: 'Unsucessful!' });
     }
   }
 
@@ -165,6 +170,7 @@ class App extends React.Component {
         // Call handleUpdate method passing in false as argument when input loses focus
         onBlur: () =>
           this.handleUpdate(false).then(() =>
+            // Chain .then to set isUpdating to false and remove updateMessage
             setTimeout(() => this.setState({ isUpdating: false }), 1000)
           ),
         // Call handleChange helper function passing in e.taget.value as argument when input changes
@@ -192,9 +198,13 @@ class App extends React.Component {
      * Use Input to create wrapper component for input element components(Text, Checkbox, Textarea, Repeatable)
      */
     const { Input } = this;
+
+    // Extract properties from state and store to respective variables
     const { isLoading, isUpdating, updateMessage } = this.state;
+
     return (
       <div className="Form">
+        {/* Show 'Loading...' if value of isLoading from state is true */}
         {isLoading && <p>Loading...</p>}
         <Input label="Title" id="title">
           {props => <Text type="text" {...props} />}
@@ -218,6 +228,7 @@ class App extends React.Component {
         <button
           onClick={() =>
             this.handleUpdate(true).then(() =>
+              // Chain .then to set isUpdating to false and remove updateMessage
               setTimeout(() => this.setState({ isUpdating: false }), 1000)
             )
           }
