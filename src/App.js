@@ -151,6 +151,9 @@ class App extends React.Component {
   }
 
   render() {
+    /** Extract Input from this component.
+     * Use Input to create wrapper component for input element components(Text, Checkbox, Textarea, Repeatable)
+     */
     const { Input } = this;
     return (
       <div className="Form">
@@ -166,6 +169,7 @@ class App extends React.Component {
         <Input label="Cast" iterable id="cast">
           {props => <Repeatable {...props} />}
         </Input>
+        {/* Use handleUpdate method for button handler. Passing in true as argument for publish */}
         <button onClick={() => this.handleUpdate(true)}>{'Publish'}</button>
       </div>
     );
