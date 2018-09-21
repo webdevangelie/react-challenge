@@ -27,6 +27,10 @@ class App extends React.Component {
     this.Input = this.Input.bind(this);
   }
 
+  /**
+   * Will run when component is mounted.
+   *
+   */
   componentDidMount = () => {
     if (this.props.id) {
       this.setState({ isLoading: true }, () => {
