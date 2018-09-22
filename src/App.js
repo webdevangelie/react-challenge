@@ -31,7 +31,7 @@ class App extends React.Component {
 
   /**
    * Will run when component is mounted.
-   * Checks to see if prop id is passed in. If id passed in, will send a get request to mock api and load initial data.
+   * Checks to see if prop id is passed in. If id is passed in, will send a get request to mock api and load initial data.
    */
   componentDidMount = () => {
     // Check if id got passed in
@@ -62,18 +62,19 @@ class App extends React.Component {
   }
 
   /**
-   * Input Update Handler. Returns result which is equal to the return value of mock POST method (same data that got passed in)
+   * Input Update Handler. Returns results which is equal to the return value of mock POST method (same data that got passed in)
    * @param {boolean} publish Default value: false
    */
   async handleUpdate(publish = false) {
-    // Extract data from state using object destructuring
+    // Extract 'data' property from state using object destructuring
     const { data } = this.state;
 
-    // Set is updating to true and updateMessage to 'Updating...'
+    // Update state. Set isUpdating to true and updateMessage to 'Updating...'
     this.setState({ isUpdating: true, updateMessage: 'Updating...' });
 
     try {
-      // Call mock POST method and pass in a copy of data adding in publish property and value. Use await to wait for the call to finish and store return value to variable results
+      // Call mock POST method and pass in a copy of data adding in publish property and value.
+      // Use await to wait for the call to finish and store return value to variable results
       const results = await api.post({ ...data, publish });
       console.log('Content updated!');
 
@@ -89,31 +90,31 @@ class App extends React.Component {
   }
 
   /**
-   * Input Method. Returns a jsx(component) with div.Form-group div.Form-label. Expecting child components and uses appropriate props depending on whether iterable or not
-   * Extracts variables from props to build props that will be passed in to child components
-   * @param {component} children Child component which returns input element
-   * @param {boolean} iterable Property added to component to determine which props to use
-   * @param {string} label String used as form label
-   * @param {string} id String used as value of id prop to differentiate different Input Components
+   * Input Method. Returns a jsx(component).
    * Used in render method as a component to wrap input elements(children)
+   * Expecting child component and uses appropriate props depending on whether iterable or not
+   * @param {component} children Child component which returns input element
+   * @param {boolean} iterable Used to determine if input is repeatable and to know which props to use
+   * @param {string} label String used as input label
+   * @param {string} id String used as value of id prop to differentiate input fields
    */
   Input({ children, iterable, label, id }) {
     // Helper function which uses handleChange method declared above
-    // @param {any} value   Can be different types depending on input element
+    // @param {any} value Input value
     const handleChange = value => {
       // Call handleChange method declared above
       // Pass in object literal as argument which uses computed property name [id] and parameter value as value
       this.handleChange({ [id]: value });
     };
 
-    // Grab the value of specific property from data object in state. Can be anything
+    // Grab the value of specific property from data object in state
     // Note this is different from the parameter named value declared above
     const value = this.state.data[id];
 
-    // Create props variable, initialized to an empty object. Will later be asigned to an object containing props depending on whether iterable
+    // Create props variable, initialize to an empty object. Will later be asigned to an object containing props depending on whether input is iterable or not
     let props = {};
 
-    // Check to see if iterable property exists
+    // Check to see if iterable
     if (iterable) {
       // If it is, use this object as props:
       props = {
@@ -162,22 +163,26 @@ class App extends React.Component {
         onDelete: id => handleChange(value.filter(prev => prev.id !== id))
       };
     } else {
-      // If iterable does not exist/no iterable property, use this object as props:
+      // If input is not iterable, use this object as props:
       props = {
         id, // {string} corresponding to the id property
-        value, // {any} value can be anything
+        value, // {any} value can be anything, depending on input
 
-        // Call handleUpdate method passing in false as argument when input loses focus
+        // Will be called when input loses focus
         onBlur: () =>
+          // Call handleUpdate method passing in false as argument
           this.handleUpdate(false).then(() =>
-            // Chain .then to set isUpdating to false and remove updateMessage
+            // Remove updateMessage after 1sec
             setTimeout(() => this.setState({ isUpdating: false }), 1000)
           ),
-        // Call handleChange helper function passing in e.taget.value as argument when input changes
+        // Will get called whenever input changes
         onChange: e => {
+          // Check if input type is checkbox
           e.target.type === 'checkbox'
-            ? handleChange(e.target.checked)
-            : handleChange(e.target.value);
+            ? // If it is, update state by caling handleChange helper function and pass in e.target.checked
+              handleChange(e.target.checked)
+            : // otherwise pass in e.target.value
+              handleChange(e.target.value);
         }
       };
     }
@@ -187,7 +192,7 @@ class App extends React.Component {
       <div className="Form-Group">
         {/* Use label property as form label */}
         <div className="Form-Label">{label}</div>
-        {/* Expects child component which uses appropriate props whether iterable or not iterable */}
+        {/* Expects child component and uses appropriate props whether input is iterable or not*/}
         {children(props)}
       </div>
     );
@@ -195,7 +200,7 @@ class App extends React.Component {
 
   render() {
     /** Extract Input from this component.
-     * Use Input to create wrapper component for input element components(Text, Checkbox, Textarea, Repeatable)
+     * Used to create wrapper component for input element components(Text, Checkbox, Textarea, Repeatable)
      */
     const { Input } = this;
 
@@ -224,11 +229,11 @@ class App extends React.Component {
         <Input label="Rating" id="rating">
           {props => <Text type="number" {...props} />}
         </Input>
-        {/* Use handleUpdate method for button handler. Passing in true as argument for publish */}
+        {/* Use handleUpdate method for button handler. Passing in true as argument for publish will */}
         <button
           onClick={() =>
             this.handleUpdate(true).then(() =>
-              // Chain .then to set isUpdating to false and remove updateMessage
+              // Remove updateMessage after 1sec
               setTimeout(() => this.setState({ isUpdating: false }), 1000)
             )
           }
