@@ -224,7 +224,7 @@ class App extends React.Component {
           {props => <Repeatable {...props} />}
         </Input>
         <Input label="Year" id="year">
-          {props => <Select {...props} />}
+          {props => <Select {...props} range="2010,2020" />}
         </Input>
         <Input label="Rating" id="rating">
           {props => <Text type="number" {...props} />}
