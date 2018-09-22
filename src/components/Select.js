@@ -5,7 +5,7 @@ export default props => {
     if (!props.range) return [];
     const [min, max] = props.range.split(',');
     let options = [];
-    for (let i = min; i < max; i++) {
+    for (let i = min; i <= max; i++) {
       options = options.concat(i);
     }
     return options;
