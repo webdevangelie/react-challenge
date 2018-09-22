@@ -70,7 +70,7 @@ class App extends React.Component {
     const { data } = this.state;
 
     // Update state. Set isUpdating to true and updateMessage to 'Updating...'
-    this.setState({ isUpdating: true, updateMessage: 'Updating...' });
+    this.setState({ isUpdating: true, updateMessage: 'Saving...' });
 
     try {
       // Call mock POST method and pass in a copy of data adding in publish property and value.
@@ -79,13 +79,13 @@ class App extends React.Component {
       console.log('Content updated!');
 
       // Change updateMessage to 'Successful!'
-      this.setState({ updateMessage: 'Successful!' });
+      this.setState({ updateMessage: 'Saved!' });
 
       // Return a promise with results as resolve value
       return results;
     } catch (error) {
       // Change updateMessage to 'Unsuccessful!'
-      this.setState({ updateMessage: 'Unsucessful!' });
+      this.setState({ updateMessage: 'Save failed. Please try again.' });
     }
   }
 
