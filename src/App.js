@@ -224,7 +224,7 @@ class App extends React.Component {
           {props => <Select {...props} range="2010,2020" />}
         </Input>
         <Input label="Rating" id="rating">
-          {props => <Text type="number" {...props} />}
+          {props => <Select {...props} range="1,5" />}
         </Input>
         {/* Use handleUpdate method for button handler. Passing in true as argument for publish will */}
         <button onClick={() => this.handleUpdate(true)}>{'Publish'}</button>
