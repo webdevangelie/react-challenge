@@ -171,10 +171,7 @@ class App extends React.Component {
         // Will be called when input loses focus
         onBlur: () =>
           // Call handleUpdate method passing in false as argument
-          this.handleUpdate(false).then(() =>
-            // Remove updateMessage after 1sec
-            setTimeout(() => this.setState({ isUpdating: false }), 1000)
-          ),
+          this.handleUpdate(false),
         // Will get called whenever input changes
         onChange: e => {
           // Check if input type is checkbox
@@ -230,16 +227,7 @@ class App extends React.Component {
           {props => <Text type="number" {...props} />}
         </Input>
         {/* Use handleUpdate method for button handler. Passing in true as argument for publish will */}
-        <button
-          onClick={() =>
-            this.handleUpdate(true).then(() =>
-              // Remove updateMessage after 1sec
-              setTimeout(() => this.setState({ isUpdating: false }), 1000)
-            )
-          }
-        >
-          {'Publish'}
-        </button>
+        <button onClick={() => this.handleUpdate(true)}>{'Publish'}</button>
         {isUpdating && updateMessage}
       </div>
     );
