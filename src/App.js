@@ -26,7 +26,8 @@ class App extends React.Component {
       },
       isLoading: false,
       isUpdating: false,
-      updateMessage: ''
+      updateMessage: '',
+      messageStatus: ''
     };
     /**
      * Bind 'this' keyword to respective methods.
@@ -77,7 +78,11 @@ class App extends React.Component {
     const { data } = this.state;
 
     // Update state. Set isUpdating to true and updateMessage to 'Saving...'
-    this.setState({ isUpdating: true, updateMessage: 'Saving...' });
+    this.setState({
+      isUpdating: true,
+      updateMessage: 'Saving...',
+      messageStatus: 'default'
+    });
 
     try {
       // Call mock POST method and pass in a copy of data adding in publish property and value.
@@ -86,13 +91,16 @@ class App extends React.Component {
       console.log('Content updated!');
 
       // Change updateMessage to 'Saved!'
-      this.setState({ updateMessage: 'Saved!' });
+      this.setState({ updateMessage: 'Saved!', messageStatus: 'success' });
 
       // Return a promise with results as resolve value
       return results;
     } catch (error) {
       // Change updateMessage
-      this.setState({ updateMessage: 'Save failed. Please try again.' });
+      this.setState({
+        updateMessage: 'Save failed. Please try again.',
+        messageStatus: 'error'
+      });
     }
   }
 
@@ -212,12 +220,12 @@ class App extends React.Component {
     const { Input } = this;
 
     // Extract properties from state and store to respective variables
-    const { isLoading, isUpdating, updateMessage } = this.state;
+    const { isLoading, isUpdating, updateMessage, messageStatus } = this.state;
 
     return (
       <div className="Form">
         {/* Show 'Loading...' if value of isLoading from state is true */}
-        {isLoading && <Message msg="Loading..." />}
+        {isLoading && <Message msg="Loading..." messageStatus="default" />}
         <Input label="Title" id="title">
           {props => <Text type="text" {...props} />}
         </Input>
@@ -249,7 +257,9 @@ class App extends React.Component {
         </button>
 
         {/* Show update message if value of isUpdating is true */}
-        {isUpdating && <Message msg={updateMessage} />}
+        {isUpdating && (
+          <Message msg={updateMessage} messageStatus={messageStatus} />
+        )}
       </div>
     );
   }

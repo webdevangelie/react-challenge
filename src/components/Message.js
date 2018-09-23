@@ -1,5 +1,5 @@
 import React from 'react';
 
 export default props => {
-  return <div>{props.msg}</div>;
+  return <div className={props.messageStatus}>{props.msg}</div>;
 };
