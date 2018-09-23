@@ -13,9 +13,9 @@ body {
 
 .Form {
   padding: 2rem;
-  background: linear-gradient(to bottom, rgba(255,255,255, .95), white);
-  border-radius: .25rem;
-  box-shadow: 1em 1em 1em rgba(0,0,0, .1);
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.95), white);
+  border-radius: 0.25rem;
+  box-shadow: 1em 1em 1em rgba(0, 0, 0, 0.1);
 }
 
 .Form-Group {
@@ -24,15 +24,27 @@ body {
 
 .Form-Label {
   text-transform: uppercase;
-  letter-spacing: .1em;
-  font-size: .7rem;
+  letter-spacing: 0.1em;
+  font-size: 0.7rem;
   font-weight: 600;
 }
 
-input[type="text"],
+input[type='text'],
 textarea {
   display: block;
-  padding: .5rem 1rem;
+  padding: 0.5rem 1rem;
   width: 100%;
   border: 1px solid #eee;
+}
+
+.default {
+  color: #6c757d;
+}
+
+.error {
+  color: #dc3545;
+}
+
+.success {
+  color: #28a745;
 }
