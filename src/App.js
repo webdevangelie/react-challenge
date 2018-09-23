@@ -76,7 +76,7 @@ class App extends React.Component {
     // Extract 'data' property from state using object destructuring
     const { data } = this.state;
 
-    // Update state. Set isUpdating to true and updateMessage to 'Updating...'
+    // Update state. Set isUpdating to true and updateMessage to 'Saving...'
     this.setState({ isUpdating: true, updateMessage: 'Saving...' });
 
     try {
@@ -85,13 +85,13 @@ class App extends React.Component {
       const results = await api.post({ ...data, publish });
       console.log('Content updated!');
 
-      // Change updateMessage to 'Successful!'
+      // Change updateMessage to 'Saved!'
       this.setState({ updateMessage: 'Saved!' });
 
       // Return a promise with results as resolve value
       return results;
     } catch (error) {
-      // Change updateMessage to 'Unsuccessful!'
+      // Change updateMessage
       this.setState({ updateMessage: 'Save failed. Please try again.' });
     }
   }
