@@ -247,6 +247,8 @@ class App extends React.Component {
         >
           {'Publish'}
         </button>
+
+        {/* Show update message if value of isUpdating is true */}
         {isUpdating && <Message msg={updateMessage} />}
       </div>
     );
