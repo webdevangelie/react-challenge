@@ -217,7 +217,7 @@ class App extends React.Component {
     return (
       <div className="Form">
         {/* Show 'Loading...' if value of isLoading from state is true */}
-        {isLoading && <p>Loading...</p>}
+        {isLoading && <Message msg="Loading..." />}
         <Input label="Title" id="title">
           {props => <Text type="text" {...props} />}
         </Input>
