@@ -27,6 +27,10 @@ class App extends React.Component {
       isLoading: false,
       isUpdating: false,
       updateMessage: '',
+
+      // Will change text color depending on status
+      // Can be set to:
+      // error = red, success = green, default = gray
       messageStatus: ''
     };
     /**
@@ -90,13 +94,13 @@ class App extends React.Component {
       const results = await api.post({ ...data, publish });
       console.log('Content updated!');
 
-      // Change updateMessage to 'Saved!'
+      // Change updateMessage to 'Saved!' messageStatus to success
       this.setState({ updateMessage: 'Saved!', messageStatus: 'success' });
 
       // Return a promise with results as resolve value
       return results;
     } catch (error) {
-      // Change updateMessage
+      // Change updateMessage and message status
       this.setState({
         updateMessage: 'Save failed. Please try again.',
         messageStatus: 'error'
