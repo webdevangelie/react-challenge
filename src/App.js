@@ -1,5 +1,12 @@
 import React from 'react';
-import { Checkbox, Repeatable, Text, Textarea, Select } from './components';
+import {
+  Checkbox,
+  Repeatable,
+  Text,
+  Textarea,
+  Select,
+  Message
+} from './components';
 import api from './mockApi';
 
 class App extends React.Component {
@@ -240,7 +247,7 @@ class App extends React.Component {
         >
           {'Publish'}
         </button>
-        {isUpdating && updateMessage}
+        {isUpdating && <Message msg={updateMessage} />}
       </div>
     );
   }
