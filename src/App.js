@@ -236,7 +236,7 @@ class App extends React.Component {
         <Input label="Rating" id="rating">
           {props => <Select {...props} range="1,5" />}
         </Input>
-        {/* Use handleUpdate method for button handler. Passing in true as argument for publish will */}
+        {/* Use handleUpdate method for button handler. Passing in true as argument for publish will flag it as submitted */}
         <button
           onClick={() =>
             this.handleUpdate(true).then(() =>
